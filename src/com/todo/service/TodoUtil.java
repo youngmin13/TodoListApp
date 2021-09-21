@@ -1,11 +1,12 @@
 package com.todo.service;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.*;
-import java.util.Date;
 
 import com.todo.dao.TodoItem;
 import com.todo.dao.TodoList;
@@ -13,11 +14,12 @@ import com.todo.dao.TodoList;
 public class TodoUtil {
 	
 	static Date time;
+	String filename = "todolist.txt";
 	
 	public static void saveList(TodoList l, String filename)
 	{
 		try {
-			Writer w = new FileWriter("todolist.txt");
+			Writer w = new FileWriter(filename);
 			
 			for (TodoItem item : l.getList())
 			{
@@ -37,7 +39,37 @@ public class TodoUtil {
 	
 	public static void loadList(TodoList l, String filename)
 	{
+		int count = 0;
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(filename));
 		
+			String oneline;
+			
+			while ((oneline = br.readLine()) != null) {
+				StringTokenizer st = new StringTokenizer(oneline, "##");
+				String title = st.nextToken();
+				String desc = st.nextToken();
+				
+				TodoItem s = new TodoItem(title, desc);
+				
+				l.addItem(s);
+				
+				count++;
+			}
+			br.close();
+			if(count != 0)
+				System.out.println(count + "개 항목을 읽었습니다.");
+			else
+				System.out.println(filename + "파일이 없습니다.");
+			
+		} catch (FileNotFoundException e) {
+			System.out.println(filename + "파일이 없습니다.");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void createItem(TodoList list) {
