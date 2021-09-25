@@ -21,6 +21,7 @@ public class TodoMain {
 			isList = false;
 		
 			String choice = sc.next();
+			String keyword;
 			switch (choice) {
 
 			case "add":
@@ -65,6 +66,28 @@ public class TodoMain {
 			case "help":
 				Menu.displaymenu();
 				break;
+				
+			case "find":
+				keyword = sc.next();
+				TodoUtil.findItem(l, keyword);
+				break;
+			
+			case "ls_date_desc":
+				System.out.println("날짜역순으로 정렬");
+				l.sortByDate();
+				l.reverseList();
+				isList = true;
+				break;
+			
+			case "find_cate":
+				keyword = sc.next();
+				TodoUtil.findCategory(l, keyword);
+				break;
+				
+			case "ls_cate":
+				TodoUtil.listCategory(l);
+				break;
+				
 
 			default:
 				System.out.println("정확한 명령어를 입력하세요. (도움말 - help)");

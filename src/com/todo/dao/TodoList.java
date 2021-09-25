@@ -36,11 +36,24 @@ public class TodoList {
 	}
 
 	public void listAll() {
-		System.out.println("[전체 목록]");
-		for (TodoItem item : list) {
-			System.out.print("[" + item.getTitle());
-			System.out.println( "] " + item.getDesc() + " - " + item.getCurrent_date());
+		
+		int count = 0;
+		
+		for(TodoItem item : list)
+		{
+			count++;
 		}
+		
+		int number = 1;
+
+		System.out.println("[전체 목록, 총 " + count + "개]");
+		
+		for (TodoItem item : list) {
+			System.out.print(number + ". [" + item.getCategory());
+			System.out.println( "] " + item.getTitle() + " - " + item.getDesc() + " - " + item.getDue_date() + " - " + item.getCurrent_date());
+			number++;
+		}
+
 	}
 	
 	public void reverseList() {
