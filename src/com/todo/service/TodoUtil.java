@@ -320,7 +320,7 @@ public class TodoUtil {
 			}
 		}
 		
-		System.out.println("\n총 " + number + "개의 카데고리가 등록되어 있습니다.");
+		System.out.println("\n총 " + number + "개의 카데고리가 등록되어 있습니다!");
 		
 	}
 }
